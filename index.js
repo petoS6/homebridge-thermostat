@@ -8,31 +8,29 @@ module.exports = function(homebridge){
 };
 
 function Thermostat(log, config) {
-	this.log = log;
+  this.log = log;
 
   this.name = config.name;
   this.manufacturer = config.manufacturer || 'HTTP Manufacturer';
   this.model = config.model || 'homebridge-thermostat';
   this.serial = config.serial || 'HTTP Serial Number';
-
   this.apiroute = config.apiroute
   this.username = config.username || null;
-	this.password = config.password || null;
+  this.password = config.password || null;
   this.timeout = config.timeout || 5000;
   this.http_method = config.http_method || 'GET';
-
   this.currentHumidity = config.currentHumidity || false;
   this.targetHumidity = config.targetHumidity || false;
   this.temperatureDisplayUnits = config.temperatureDisplayUnits || 0;
-	this.maxTemp = config.maxTemp || 30;
-	this.minTemp = config.minTemp || 15;
+  this.maxTemp = config.maxTemp || 30;
+  this.minTemp = config.minTemp || 15;
   this.heatOnly = config.heatOnly || false;
   this.targetRelativeHumidity = 90;
   this.currentRelativeHumidity = 90;
   this.targetTemperature = 25;
-	this.currentTemperature = 20;
+  this.currentTemperature = 20;
   this.targetHeatingCoolingState = 3;
-	this.heatingCoolingState = 1;
+  this.heatingCoolingState = 1;
 
   if(this.username != null && this.password != null){
     this.auth = {
@@ -42,8 +40,7 @@ function Thermostat(log, config) {
   }
 
   this.log(this.name, this.apiroute);
-
-	this.service = new Service.Thermostat(this.name);
+  this.service = new Service.Thermostat(this.name);
 }
 
 Thermostat.prototype = {
@@ -67,7 +64,7 @@ Thermostat.prototype = {
           });
   },
 
-	getCurrentHeatingCoolingState: function(callback) {
+  getCurrentHeatingCoolingState: function(callback) {
     this.log("[+] getCurrentHeatingCoolingState from:", this.apiroute+"/status");
     var url = this.apiroute+"/status";
     this._httpRequest(url, '', 'GET', function (error, response, responseBody) {
@@ -84,7 +81,7 @@ Thermostat.prototype = {
           callback(null, this.currentHeatingCoolingState);
         }
     }.bind(this));
-	},
+  },
 
   getTargetHeatingCoolingState: function(callback) {
     this.log("[+] getTargerHeatingCoolingState from:", this.apiroute+"/status");
@@ -233,21 +230,21 @@ Thermostat.prototype = {
     }.bind(this));
   },
 
-	getTemperatureDisplayUnits: function(callback) {
+  getTemperatureDisplayUnits: function(callback) {
 		//this.log("getTemperatureDisplayUnits:", this.temperatureDisplayUnits);
 		callback(null, this.temperatureDisplayUnits);
-	},
+  },
 
   setTemperatureDisplayUnits: function(value, callback) {
-		this.log("[*] setTemperatureDisplayUnits from %s to %s", this.temperatureDisplayUnits, value);
-		this.temperatureDisplayUnits = value;
-		callback();
-	},
+    this.log("[*] setTemperatureDisplayUnits from %s to %s", this.temperatureDisplayUnits, value);
+    this.temperatureDisplayUnits = value;
+    callback();
+  },
 
-	getName: function(callback) {
-		this.log("getName :", this.name);
-		callback(null, this.name);
-	},
+  getName: function(callback) {
+    this.log("getName :", this.name);
+    callback(null, this.name);
+  },
 
 	getServices: function() {
 

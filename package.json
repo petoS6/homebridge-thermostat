@@ -1,6 +1,6 @@
 {
-  "name": "homebridge-thermostat",
-  "version": "0.0.52",
+  "name": "homebridge-thermostat-tech-controllers",
+  "version": "0.0.1",
   "description": "thermostat plugin for homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
@@ -10,10 +10,10 @@
     "node": ">=0.12.0",
     "homebridge": ">=0.2.0"
   },
-  "author": "Pierre-Julien Cazaux",
+  "author": "Peter Suly",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PJCzx/homebridge-thermostat.git"
+    "url": "https://github.com/petoS6/homebridge-thermostat"
   },
   "dependencies": {
     "request": "^2.65.0"
