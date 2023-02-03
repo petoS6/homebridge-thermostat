@@ -15,8 +15,7 @@ function Thermostat(log, config) {
   this.model = config.model || 'homebridge-thermostat';
   this.serial = config.serial || 'HTTP Serial Number';
   this.apiroute = config.apiroute
-  this.username = config.username || null;
-  this.password = config.password || null;
+  this.token = config.token;
   this.timeout = config.timeout || 5000;
   this.http_method = config.http_method || 'GET';
   this.currentHumidity = config.currentHumidity || false;
@@ -31,13 +30,6 @@ function Thermostat(log, config) {
   this.currentTemperature = 20;
   this.targetHeatingCoolingState = 3;
   this.heatingCoolingState = 1;
-
-  if(this.username != null && this.password != null){
-    this.auth = {
-      user : this.username,
-      pass : this.password
-    };
-  }
 
   this.log(this.name, this.apiroute);
   this.service = new Service.Thermostat(this.name);
@@ -57,7 +49,10 @@ Thermostat.prototype = {
           method: this.http_method,
           timeout: this.timeout,
           rejectUnauthorized: false,
-          auth: this.auth
+          headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ${this.token}'
+          }
       },
           function (error, response, body) {
               callback(error, response, body);
