@@ -4,11 +4,7 @@ var request = require("request");
 module.exports = function(homebridge){
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory("homebridge-thermostat-tech-controllers", "Termostat Pracovna", Thermostat);
-  homebridge.registerAccessory("homebridge-thermostat-tech-controllers", "Termostat Detska", Thermostat);
-  homebridge.registerAccessory("homebridge-thermostat-tech-controllers", "Termostat Spalna", Thermostat);
-  homebridge.registerAccessory("homebridge-thermostat-tech-controllers", "Termostat Obyvacka", Thermostat);
-  homebridge.registerAccessory("homebridge-thermostat-tech-controllers", "Termostat Kupelna", Thermostat);
+  homebridge.registerAccessory("homebridge-thermostat-tech-controllers", "Termostat", Thermostat);
 };
 
 function Thermostat(log, config) {
